@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
 
+<h2>Event Registration</h2>
+
+<input id="twitter" placeholder="Twitter Username">
+<input id="lastfm" placeholder="Last.fm Username">
+<input id="link" placeholder="Last.fm Account Link">
+
+<button onclick="register()">Register</button>
+
+<p id="result"></p>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbxvSsMEVYgqQUPmX6O0BkjR3mjllYpTTjsXJ8Crt5cQiEG7rR8BS0H7e9Q-gEr4wog/exec';
+
+function register() {
+  const data = {
+    twitter: document.getElementById('twitter').value,
+    lastfm: document.getElementById('lastfm').value,
+    link: document.getElementById('link').value
+  };
+
+  fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(result => {
+    document.getElementById('result').textContent =
+      'Registration complete! You are on ' + result.team + '.';
+  });
+}
+</script>
+
+</body>
+</html>
