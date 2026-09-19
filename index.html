@@ -1,39 +1,87 @@
-<!DOCTYPE html><html lang="en"><head>  <meta name="viewport" content="width=device-width, initial-scale=1">  <title>Event Registration</title>
-  <style>    body {      font: 18px Arial, sans-serif;      max-width: 500px;      margin: 40px auto;      padding: 20px;    }
-    h2 {      font-size: 28px;    }
-    input,    button {      width: 100%;      box-sizing: border-box;      padding: 14px;      margin: 8px 0;      font-size: inherit;    }
-    button {      cursor: pointer;    }
-    #result {      margin-top: 20px;    }  </style></head>
-<body>  <h2>Event Registration</h2>
-  <form id="registration">    <input id="twitter" placeholder="Twitter Username" required>    <input id="lastfm" placeholder="Last.fm Username" required>    <input id="link" placeholder="Last.fm Account Link" required>
-    <button type="submit">Register</button>  </form>
-  <p id="result"></p>
-  <script>
-  const API_URL = 'https://script.google.com/macros/s/AKfycbxvSsMEVYgqQUPmX6O0BkjR3mjllYpTTjsXJ8Crt5cQiEG7rR8BS0H7e9Q-gEr4wog/exec';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Registration</title>
 
-  const form = document.getElementById('registration');
-  const twitter = document.getElementById('twitter');
-  const lastfm = document.getElementById('lastfm');
-  const link = document.getElementById('link');
-  const result = document.getElementById('result');
+  <style>
+    body {
+      font: 20px Arial, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+    }
 
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    h2 {
+      font-size: 30px;
+    }
 
-    const data = {
-      twitter: twitter.value.trim(),
-      lastfm: lastfm.value.trim(),
-      link: link.value.trim()
-    };
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      body: JSON.stringify(data)
+    input,
+    button {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 16px;
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Event Registration</h2>
+
+  <form id="registration">
+    <input id="twitter" type="text" placeholder="Twitter Username" required>
+    <input id="lastfm" type="text" placeholder="Last.fm Username" required>
+    <input id="link" type="url" placeholder="Last.fm Account Link" required>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    const API_URL = 'YOUR_APPS_SCRIPT_URL';
+
+    const form = document.getElementById('registration');
+    const twitter = document.getElementById('twitter');
+    const lastfm = document.getElementById('lastfm');
+    const link = document.getElementById('link');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const data = {
+        twitter: twitter.value.trim(),
+        lastfm: lastfm.value.trim(),
+        link: link.value.trim()
+      };
+
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify(data)
+      });
+
+      const { team } = await response.json();
+
+      result.textContent =
+        `Registration complete! You are on ${team}.`;
     });
-
-    const { team } = await response.json();
-
-    result.textContent =
-      `Registration complete! You are on ${team}.`;
-  });
   </script>
+</body>
+</html>
