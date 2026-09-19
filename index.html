@@ -8,18 +8,10 @@
   <form id="registration">    <input id="twitter" placeholder="Twitter Username" required>    <input id="lastfm" placeholder="Last.fm Username" required>    <input id="link" placeholder="Last.fm Account Link" required>
     <button type="submit">Register</button>  </form>
   <p id="result"></p>
-  <script>    const API_URL = 'https://script.google.com/macros/s/AKfycbxvSsMEVYgqQUPmX6O0BkjR3mjllYpTTjsXJ8Crt5cQiEG7rR8BS0H7e9Q-gEr4wog/exec';    const form = document.getElementById('registration');    const result = document.getElementById('result');
+  <script>    const API_URL = 'https://script.google.com/macros/s/AKfycbxvSsMEVYgqQUPmX6O0BkjR3mjllYpTTjsXJ8Crt5cQiEG7rR8BS0H7e9Q-gEr4wog/exec';
+    const form = document.getElementById('registration');    const twitter = document.getElementById('twitter');    const lastfm = document.getElementById('lastfm');    const link = document.getElementById('link');    const result = document.getElementById('result');
     form.addEventListener('submit', async (event) => {      event.preventDefault();
-      const data = {        twitter: twitter.value,        lastfm: lastfm.value,        link: link.value      };
+      const data = {        twitter: twitter.value.trim(),        lastfm: lastfm.value.trim(),        link: link.value.trim()      };
       const response = await fetch(API_URL, {        method: 'POST',        body: JSON.stringify(data)      });
-      const { team } = await response.json();      result.textContent = `Registration complete! You are on ${team}.`;    });  </script></body></html>  })
-  .then(response => response.json())
-  .then(result => {
-    document.getElementById('result').textContent =
-      'Registration complete! You are on ' + result.team + '.';
-  });
-}
-</script>
-
-</body>
-</html>
+      const { team } = await response.json();
+      result.textContent =        `Registration complete! You are on ${team}.`;    });  </script></body></html>
