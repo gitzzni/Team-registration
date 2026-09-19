@@ -1,5 +1,39 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 20px;
+      font-size: 18px;
+    }
+
+    h2 {
+      font-size: 28px;
+    }
+
+    input, button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px;
+      margin: 8px 0;
+      font-size: 18px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
 <body>
 
 <h2>Event Registration</h2>
@@ -13,7 +47,7 @@
 <p id="result"></p>
 
 <script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbxvSsMEVYgqQUPmX6O0BkjR3mjllYpTTjsXJ8Crt5cQiEG7rR8BS0H7e9Q-gEr4wog/exec';
+const API_URL = 'YOUR_APPS_SCRIPT_URL';
 
 function register() {
   const data = {
